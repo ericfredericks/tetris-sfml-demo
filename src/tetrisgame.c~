@@ -1,0 +1,74 @@
+#include "tetrisgame.h"
+
+void tetrisInit()
+{
+	/* State */
+	srand((unsigned)time(NULL));
+	tetrisNewArray(&tetNextQueue);
+	tetrisNewArray(&tetBag);
+	tetAmtBag = NUM_PIECES;
+
+	/* SFML */
+	grid = sfmVertexArray_grid(0,0,W_MATRIX,H_MATRIX,5);
+}
+
+void tetrisDisplay()
+{
+	sfRenderWindow_clear(window,sfBlack);
+	sfRenderWindow_drawVertexArray(window,grid,NULL);
+	sfRenderWindow_display(window);
+}
+
+void tetrisUpdate()
+{
+	
+}
+
+void tetrisExit()
+{
+	sfVertexArray_destroy(grid);
+}
+
+void tetrisNewArray(int(*array)[NUM_PIECES])
+{
+	int piece[NUM_PIECES] = {0};
+	for (int i=0;i<NUM_PIECES;i++)
+	{
+		while (1)
+		{
+			piece[i] = rand() % NUM_PIECES;
+			int repeat = 0;
+			for (int j=i;j>0;j--)
+				repeat += (piece[i] == piece[j-1]);
+			if (!repeat)
+				break;
+		}
+		(*array)[i] = piece[i];
+	}
+}
+
+int tetrisGetPiece()
+{
+	int piece = tetNextQueue[0];
+	if (tetAmtBag == 0)
+	{
+		tetrisNewArray(&tetBag);
+		tetAmtBag = NUM_PIECES;
+	}
+	for (int i=1;i<NUM_PIECES;i++)
+		tetNextQueue[i-1] = tetNextQueue[i];
+	tetNextQueue[NUM_PIECES-1] = tetBag[NUM_PIECES-tetAmtBag];
+	tetAmtBag--;
+	return piece;
+}
+
+void tetrisPrintArrays()
+{
+	for (int i=0;i<NUM_PIECES;i++)
+		printf("%i",tetBag[i]);
+	printf("\n");
+	printf("TETNEXTQUEUE:");
+	for (int i=0;i<NUM_PIECES;i++)
+		printf("%i",tetNextQueue[i]);
+	printf("\n");
+}

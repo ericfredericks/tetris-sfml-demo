@@ -1,0 +1,22 @@
+#include "sfmlgrid.h"
+
+sfVertexArray* sfmVertexArray_createGrid(int left,int top,int width,int height,int size)
+{
+	sfVertexArray *va = sfVertexArray_create();
+	sfVertexArray_setPrimitiveType(va,sfLines);
+	for (int i=0;i<height+1;i++)
+	{
+		sfVertex v1 = {(sfVector2f){left,top+i*size},sfRed,(sfVector2f){0.f,0.f}};
+		sfVertex v2 = {(sfVector2f){left+width*size,top+i*size},sfRed,(sfVector2f){0.f,0.f}};
+		sfVertexArray_append(va,v1);
+		sfVertexArray_append(va,v2);
+	}
+	for (int i=0;i<width+1;i++)
+	{
+		sfVertex v3 = {(sfVector2f){left+i*size,top},sfRed,(sfVector2f){0.f,0.f}};
+		sfVertex v4 = {(sfVector2f){left+i*size,top+height*size},sfRed,(sfVector2f){0.f,0.f}};
+		sfVertexArray_append(va,v3);
+		sfVertexArray_append(va,v4);
+	}
+	return va;
+}

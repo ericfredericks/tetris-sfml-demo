@@ -1,0 +1,9 @@
+#ifndef TOP_H
+#define TOP_H
+
+#include <SFML/Graphics.h>
+
+sfRenderWindow *window;
+enum {STATE_GAME};
+
+#endif

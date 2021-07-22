@@ -1,0 +1,13 @@
+#ifndef TETROMINO_H
+#define TETROMINO_H
+
+#include <SFML/Graphics.h>
+
+typedef struct
+{
+	int x,y,rot;
+	const int W,H,TYPE;
+	sfSprite[4] sprite;
+} tetTetromino;
+
+#endif

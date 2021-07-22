@@ -1,0 +1,42 @@
+#ifndef TETRISGAME_H
+#define TETRISGAME_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <SFML/Graphics.h>
+#include "top.h"
+#include "sfmlgrid.h"
+
+
+
+void tetrisstatePush(int);
+void tetrisstatePop();
+
+
+
+#define NUM_PIECES 7
+#define W_MATRIX 10
+#define H_MATRIX 40
+enum {TET_O,TET_I,TET_T,TET_L,TET_J,TET_S,TET_Z};
+
+
+/* State */
+int tetBag[NUM_PIECES];
+int tetNextQueue[NUM_PIECES];
+int tetAmtBag;
+
+/* SFML */
+sfVertexArray *grid;
+
+void tetrisInit();
+void tetrisDisplay();
+void tetrisUpdate();
+void tetrisExit();
+void tetrisNewArray(int(*)[NUM_PIECES]);
+int tetrisGetPiece();
+void tetrisPrintArrays();
+
+
+#endif

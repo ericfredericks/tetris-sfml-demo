@@ -1,0 +1,12 @@
+#ifndef TETRIS_SFML_H
+#define TETRIS_SFML_H
+
+#include <SFML/Graphics.h>
+#include "top.h"
+
+/*sfVertexArray* sfmlVertexArray_createGrid(int,int,int,int,int);*/
+sfVertexArray* sfmlVertexArray_createTetrisMatrix(int,int,int,int,int);
+sfVertexArray* sfmlVertexArray_createTetrisBlocks(int,int,int[11][41],int);
+
+
+#endif
